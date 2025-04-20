@@ -50,3 +50,6 @@ through the [Customer Center](https://my.yworks.com/) or by email [yfileshtml@yw
 
 ## Sample view of the website
 ![](/docs/website_view.png)
+
+## Sample view of app builder
+![](/docs/app_builder.png)

@@ -49,4 +49,4 @@ If you need help with your setup or a certain feature, don't hesitate to contact
 through the [Customer Center](https://my.yworks.com/) or by email [yfileshtml@yworks.com](mailto:yfileshtml@yworks.com).
 
 ## Sample view of the website
-[](/docs/website_view.png)
+![](/docs/website_view.png)

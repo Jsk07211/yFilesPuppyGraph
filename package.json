@@ -1,0 +1,21 @@
+{
+  "name": "gremlin-modern",
+  "version": "2025.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "postinstall": "node -e \"require('fs').copyFileSync('../yFiles-for-HTML/lib/license.json','./src/license.json')\"",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@yfiles/yfiles": "../yFiles-for-HTML/lib/yfiles-30.0.1+eval-dev.tgz",
+    "gremlin": "3.5.1",
+    "gremlin-js-driver": "^0.0.1"
+  },
+  "devDependencies": {
+    "vite": "^6.1.0",
+    "vite-plugin-node-polyfills": "^0.23.0"
+  }
+}

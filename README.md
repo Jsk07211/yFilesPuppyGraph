@@ -47,9 +47,3 @@ that covers anything from graph creation and styling to automatic layouts and ad
 
 If you need help with your setup or a certain feature, don't hesitate to contact our support
 through the [Customer Center](https://my.yworks.com/) or by email [yfileshtml@yworks.com](mailto:yfileshtml@yworks.com).
-
-## Sample view of the website
-![](/docs/website_view.png)
-
-## Sample view of app builder
-![](/docs/app_builder.png)

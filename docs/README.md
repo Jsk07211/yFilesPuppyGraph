@@ -5,7 +5,7 @@ While PuppyGraph comes with its own built-in UI for exploring graph data, its de
 
 That’s where yWorks really starts to shine. With the right tools, it’s much easier to make sense of dense relationships, uncover hidden patterns, and communicate insights clearly. 
 
-For this tutorial, we’re using building a **cloud security graph** — and that’s no coincidence. Cloud security is one of the most common and impactful use cases for graph analytics. With complex relationships between users, roles, assets, permissions, and threats, it's a perfect real-world example of where graph structures truly shine. You can find all required resources in the [GitHub repository](https://github.com/puppygraph/puppygraph-getting-started/tree/main/use-case-demos/cloud-security-graph-demo), and a more in-depth exploration of this dataset in our [blog](https://www.puppygraph.com/blog/wiz-security-graph).
+For this tutorial, we’re using building a **cloud security graph** — and for good reason. Cloud security is one of the most common and impactful use cases for graph analytics. With complex relationships between users, roles, assets, permissions, and threats, it's a perfect real-world example of where graph structures truly shine. You can find all required resources in the [GitHub repository](https://github.com/puppygraph/puppygraph-getting-started/tree/main/use-case-demos/cloud-security-graph-demo), and a more in-depth exploration of this dataset in our [blog](https://www.puppygraph.com/blog/wiz-security-graph).
 
 
 # Step 1: Deploying PuppyGraph
@@ -284,3 +284,10 @@ We can also edit the code in `loadGraph.js` instead of using the app generator. 
 ![](webview.png)
 
 # Step 3: Querying the Graph
+The full graph looks cool — no doubt. But when you're staring at hundreds of nodes and edges, it gets hard to tell what’s actually going on. It’s a lot to take in, and without some direction, it’s easy to get lost in the noise.
+
+Currently, we're querying for everything with this command:
+```
+g.V().valueMap(true)
+```
+

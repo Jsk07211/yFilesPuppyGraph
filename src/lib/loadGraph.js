@@ -50,17 +50,225 @@ import { arrange } from './Layout'
  */
 export default async function loadGraph() {
   const labelConfiguration = await buildLabelConfiguration({
+    textBinding: (item) => item.label,
+    placement: () => 'center',
+    fill: () => 'gray',
+  })
+  const edgeCreator = await buildEdgeCreator([labelConfiguration], {
+    stroke: () => '1px gray',
+    sourceArrow: () => 'none',
+    targetArrow: () => 'triangle',
+  })
+  const labelConfiguration2 = await buildLabelConfiguration({
     textBinding: (item) => item.id,
     placement: () => 'bottom',
   })
-  const labelConfiguration2 = await buildLabelConfiguration({
-    textBinding: new Function(
-      "with(arguments[0]) { return (\nname[0] + '\\n   language: ' + lang[0]) }"
-    ),
+  const labelConfiguration3 = await buildLabelConfiguration({
+    textBinding: (item) => item.protocol,
     placement: () => 'topleft',
   })
   const nodeCreator = await buildNodeCreator(
-    [labelConfiguration2, labelConfiguration],
+    [labelConfiguration3, labelConfiguration2],
+    {
+      x: () => 0,
+      width: () => 120,
+      height: () => 80,
+      styleProvider: 'ShapeNodeStyle',
+      fill: () => 'lightblue',
+      shape: () => 'round-rectangle',
+      stroke: () => '2px #0055cc',
+    }
+  )
+  const labelConfiguration4 = await buildLabelConfiguration({
+    textBinding: (item) => item.id,
+    placement: () => 'bottom',
+  })
+  const labelConfiguration5 = await buildLabelConfiguration({
+    textBinding: (item) => item.ip_address,
+    placement: () => 'topleft',
+  })
+  const nodeCreator2 = await buildNodeCreator(
+    [labelConfiguration5, labelConfiguration4],
+    {
+      x: () => 0,
+      width: () => 120,
+      height: () => 80,
+      styleProvider: 'ShapeNodeStyle',
+      fill: () => 'lightblue',
+      shape: () => 'round-rectangle',
+      stroke: () => '2px #0055cc',
+    }
+  )
+  const labelConfiguration6 = await buildLabelConfiguration({
+    textBinding: (item) => item.id,
+    placement: () => 'bottom',
+  })
+  const labelConfiguration7 = await buildLabelConfiguration({
+    textBinding: (item) => item.ip_address,
+    placement: () => 'topleft',
+  })
+  const nodeCreator3 = await buildNodeCreator(
+    [labelConfiguration7, labelConfiguration6],
+    {
+      x: () => 0,
+      width: () => 120,
+      height: () => 80,
+      styleProvider: 'ShapeNodeStyle',
+      fill: () => 'lightblue',
+      shape: () => 'round-rectangle',
+      stroke: () => '2px #0055cc',
+    }
+  )
+  const labelConfiguration8 = await buildLabelConfiguration({
+    textBinding: (item) => item.id,
+    placement: () => 'bottom',
+  })
+  const labelConfiguration9 = await buildLabelConfiguration({
+    textBinding: (item) => item.name,
+    placement: () => 'topleft',
+  })
+  const nodeCreator4 = await buildNodeCreator(
+    [labelConfiguration9, labelConfiguration8],
+    {
+      x: () => 0,
+      width: () => 120,
+      height: () => 80,
+      styleProvider: 'ShapeNodeStyle',
+      fill: () => 'lightblue',
+      shape: () => 'round-rectangle',
+      stroke: () => '2px #0055cc',
+    }
+  )
+  const labelConfiguration10 = await buildLabelConfiguration({
+    textBinding: (item) => item.id,
+    placement: () => 'bottom',
+  })
+  const labelConfiguration11 = await buildLabelConfiguration({
+    textBinding: (item) => item.name,
+    placement: () => 'topleft',
+  })
+  const nodeCreator5 = await buildNodeCreator(
+    [labelConfiguration11, labelConfiguration10],
+    {
+      x: () => 0,
+      width: () => 120,
+      height: () => 80,
+      styleProvider: 'ShapeNodeStyle',
+      fill: () => 'lightblue',
+      shape: () => 'round-rectangle',
+      stroke: () => '2px #0055cc',
+    }
+  )
+  const labelConfiguration12 = await buildLabelConfiguration({
+    textBinding: (item) => item.id,
+    placement: () => 'bottom',
+  })
+  const labelConfiguration13 = await buildLabelConfiguration({
+    textBinding: (item) => item.name,
+    placement: () => 'topleft',
+  })
+  const nodeCreator6 = await buildNodeCreator(
+    [labelConfiguration13, labelConfiguration12],
+    {
+      x: () => 0,
+      width: () => 120,
+      height: () => 80,
+      styleProvider: 'ShapeNodeStyle',
+      fill: () => 'lightblue',
+      shape: () => 'round-rectangle',
+      stroke: () => '2px #0055cc',
+    }
+  )
+  const labelConfiguration14 = await buildLabelConfiguration({
+    textBinding: (item) => item.id,
+    placement: () => 'bottom',
+  })
+  const labelConfiguration15 = await buildLabelConfiguration({
+    textBinding: (item) => item.name,
+    placement: () => 'topleft',
+  })
+  const nodeCreator7 = await buildNodeCreator(
+    [labelConfiguration15, labelConfiguration14],
+    {
+      x: () => 0,
+      width: () => 120,
+      height: () => 80,
+      styleProvider: 'ShapeNodeStyle',
+      fill: () => 'lightblue',
+      shape: () => 'round-rectangle',
+      stroke: () => '2px #0055cc',
+    }
+  )
+  const labelConfiguration16 = await buildLabelConfiguration({
+    textBinding: (item) => item.id,
+    placement: () => 'bottom',
+  })
+  const labelConfiguration17 = await buildLabelConfiguration({
+    textBinding: (item) => item.name,
+    placement: () => 'topleft',
+  })
+  const nodeCreator8 = await buildNodeCreator(
+    [labelConfiguration17, labelConfiguration16],
+    {
+      x: () => 0,
+      width: () => 120,
+      height: () => 80,
+      styleProvider: 'ShapeNodeStyle',
+      fill: () => 'lightblue',
+      shape: () => 'round-rectangle',
+      stroke: () => '2px #0055cc',
+    }
+  )
+  const labelConfiguration18 = await buildLabelConfiguration({
+    textBinding: (item) => item.id,
+    placement: () => 'bottom',
+  })
+  const labelConfiguration19 = await buildLabelConfiguration({
+    textBinding: (item) => item.name,
+    placement: () => 'topleft',
+  })
+  const nodeCreator9 = await buildNodeCreator(
+    [labelConfiguration19, labelConfiguration18],
+    {
+      x: () => 0,
+      width: () => 120,
+      height: () => 80,
+      styleProvider: 'ShapeNodeStyle',
+      fill: () => 'lightblue',
+      shape: () => 'round-rectangle',
+      stroke: () => '2px #0055cc',
+    }
+  )
+  const labelConfiguration20 = await buildLabelConfiguration({
+    textBinding: (item) => item.id,
+    placement: () => 'bottom',
+  })
+  const labelConfiguration21 = await buildLabelConfiguration({
+    textBinding: (item) => item.name,
+    placement: () => 'topleft',
+  })
+  const nodeCreator10 = await buildNodeCreator(
+    [labelConfiguration21, labelConfiguration20],
+    {
+      x: () => 0,
+      width: () => 120,
+      height: () => 80,
+      styleProvider: 'ShapeNodeStyle',
+      fill: () => 'lightblue',
+      shape: () => 'round-rectangle',
+      stroke: () => '2px #0055cc',
+    }
+  )
+  const labelConfiguration22 = await buildLabelConfiguration({
+    textBinding: (item) => item.id,
+    placement: () => 'bottom',
+  })
+  const labelConfiguration23 = await buildLabelConfiguration({
+    textBinding: (item) => item.username,
+    placement: () => 'topleft',
+  })
+  const nodeCreator11 = await buildNodeCreator(
+    [labelConfiguration23, labelConfiguration22],
     {
       x: () => 0,
       width: () => 120,
@@ -71,16 +279,16 @@ export default async function loadGraph() {
       stroke: () => '2px #cc0055',
     }
   )
-  const labelConfiguration3 = await buildLabelConfiguration({
+  const labelConfiguration24 = await buildLabelConfiguration({
     textBinding: (item) => item.id,
     placement: () => 'bottom',
   })
-  const labelConfiguration4 = await buildLabelConfiguration({
+  const labelConfiguration25 = await buildLabelConfiguration({
     textBinding: (item) => item.label,
     placement: () => 'center',
     fill: () => 'gray',
   })
-  const edgeCreator = await buildEdgeCreator([labelConfiguration4], {
+  const edgeCreator2 = await buildEdgeCreator([labelConfiguration25], {
     stroke: () => '1px gray',
     sourceArrow: () => 'none',
     targetArrow: () => 'triangle',
@@ -93,21 +301,38 @@ export default async function loadGraph() {
     mimeType: 'application/vnd.gremlin-v3.0+json',
   })
   const out = await project(data, { binding: (item) => item._items })
+  const out2 = await filter(out, {
+    expression: new Function(
+      'with(arguments[0]) { return (label === "ACCESS") }'
+    ),
+  })
   const edgesSource = await buildEdgesSourceData(
-    { data: out, edgeCreator },
+    { data: out2, edgeCreator },
     {
+      idProvider: (item) => item.id,
       sourceIdProvider: (item) => item.outV.id,
       targetIdProvider: (item) => item.inV.id,
     }
   )
-  const labelConfiguration5 = await buildLabelConfiguration({
-    textBinding: new Function(
-      "with(arguments[0]) { return ('   name: ' + name[0] + '\\n   age: ' + age) }"
+  const out3 = await filter(out, {
+    expression: new Function(
+      'with(arguments[0]) { return (label === "ACCESS") }'
     ),
+  })
+  const edgesSource2 = await buildEdgesSourceData(
+    { data: out3, edgeCreator: edgeCreator2 },
+    {
+      idProvider: (item) => item.id,
+      sourceIdProvider: (item) => item.outV.id,
+      targetIdProvider: (item) => item.inV.id,
+    }
+  )
+  const labelConfiguration26 = await buildLabelConfiguration({
+    textBinding: (item) => item.name,
     placement: () => 'topleft',
   })
-  const nodeCreator2 = await buildNodeCreator(
-    [labelConfiguration5, labelConfiguration3],
+  const nodeCreator12 = await buildNodeCreator(
+    [labelConfiguration26, labelConfiguration24],
     {
       x: () => 0,
       width: () => 120,
@@ -125,40 +350,135 @@ export default async function loadGraph() {
     username: 'puppygraph',
     mimeType: 'application/vnd.gremlin-v3.0+json',
   })
-  const out2 = await project(data2, { binding: (item) => item._items })
-  const out3 = await filter(out2, {
+  const out4 = await project(data2, { binding: (item) => item._items })
+  const out5 = await filter(out4, {
     expression: new Function(
-      "with(arguments[0]) { return (label === 'software') }"
+      'with(arguments[0]) { return (label === "IngressRule") }'
     ),
   })
   const nodesSource = await buildNodesSourceData(
-    { data: out3, nodeCreator },
+    { data: out5, nodeCreator },
     { idProvider: (item) => item.id }
   )
-  const out4 = await filter(out2, {
+  const out6 = await filter(out4, {
     expression: new Function(
-      "with(arguments[0]) { return (label === 'person') }"
+      'with(arguments[0]) { return (label === "PrivateIP") }'
     ),
   })
   const nodesSource2 = await buildNodesSourceData(
-    { data: out4, nodeCreator: nodeCreator2 },
+    { data: out6, nodeCreator: nodeCreator2 },
+    { idProvider: (item) => item.id }
+  )
+  const out7 = await filter(out4, {
+    expression: new Function(
+      'with(arguments[0]) { return (label === "PublicIP") }'
+    ),
+  })
+  const nodesSource3 = await buildNodesSourceData(
+    { data: out7, nodeCreator: nodeCreator3 },
+    { idProvider: (item) => item.id }
+  )
+  const out8 = await filter(out4, {
+    expression: new Function(
+      'with(arguments[0]) { return (label === "Resource") }'
+    ),
+  })
+  const nodesSource4 = await buildNodesSourceData(
+    { data: out8, nodeCreator: nodeCreator4 },
+    { idProvider: (item) => item.id }
+  )
+  const out9 = await filter(out4, {
+    expression: new Function(
+      'with(arguments[0]) { return (label === "Role") }'
+    ),
+  })
+  const nodesSource5 = await buildNodesSourceData(
+    { data: out9, nodeCreator: nodeCreator5 },
+    { idProvider: (item) => item.id }
+  )
+  const out10 = await filter(out4, {
+    expression: new Function(
+      'with(arguments[0]) { return (label === "VMInstance") }'
+    ),
+  })
+  const nodesSource6 = await buildNodesSourceData(
+    { data: out10, nodeCreator: nodeCreator6 },
+    { idProvider: (item) => item.id }
+  )
+  const out11 = await filter(out4, {
+    expression: new Function(
+      'with(arguments[0]) { return (label === "NetworkInterface") }'
+    ),
+  })
+  const nodesSource7 = await buildNodesSourceData(
+    { data: out11, nodeCreator: nodeCreator7 },
+    { idProvider: (item) => item.id }
+  )
+  const out12 = await filter(out4, {
+    expression: new Function(
+      'with(arguments[0]) { return (label === "SecurityGroup") }'
+    ),
+  })
+  const nodesSource8 = await buildNodesSourceData(
+    { data: out12, nodeCreator: nodeCreator8 },
+    { idProvider: (item) => item.id }
+  )
+  const out13 = await filter(out4, {
+    expression: new Function(
+      'with(arguments[0]) { return (label === "Subnet") }'
+    ),
+  })
+  const nodesSource9 = await buildNodesSourceData(
+    { data: out13, nodeCreator: nodeCreator9 },
+    { idProvider: (item) => item.id }
+  )
+  const out14 = await filter(out4, {
+    expression: new Function('with(arguments[0]) { return (label === "VPC") }'),
+  })
+  const nodesSource10 = await buildNodesSourceData(
+    { data: out14, nodeCreator: nodeCreator10 },
+    { idProvider: (item) => item.id }
+  )
+  const out15 = await filter(out4, {
+    expression: new Function(
+      "with(arguments[0]) { return (label === 'User') }"
+    ),
+  })
+  const nodesSource11 = await buildNodesSourceData(
+    { data: out15, nodeCreator: nodeCreator11 },
+    { idProvider: (item) => item.id }
+  )
+  const out16 = await filter(out4, {
+    expression: new Function(
+      'with(arguments[0]) { return (label === "InternetGateway") }'
+    ),
+  })
+  const nodesSource12 = await buildNodesSourceData(
+    { data: out16, nodeCreator: nodeCreator12 },
     { idProvider: (item) => item.id }
   )
   const graph = await buildGraph({
-    nodesSources: [nodesSource2, nodesSource],
-    edgesSources: [edgesSource],
+    nodesSources: [
+      nodesSource12,
+      nodesSource11,
+      nodesSource10,
+      nodesSource9,
+      nodesSource8,
+      nodesSource7,
+      nodesSource6,
+      nodesSource5,
+      nodesSource4,
+      nodesSource3,
+      nodesSource2,
+      nodesSource,
+    ],
+    edgesSources: [edgesSource2, edgesSource],
   })
-  const out5 = await arrange(graph, {
+  const out17 = await arrange(graph, {
     worker: false,
-    name: 'HierarchicalLayout',
-    properties: {
-      layoutOrientation: 'top-to-bottom',
-      edgeLabelPlacement: 'integrated',
-      nodeDistance: 10,
-      minimumLayerDistance: 20,
-      automaticEdgeGrouping: false,
-    },
+    name: 'CircularLayout',
+    properties: { partitioningPolicy: 'bcc-compact' },
   })
 
-  return out5
+  return out17
 }

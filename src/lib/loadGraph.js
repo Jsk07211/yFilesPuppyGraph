@@ -344,7 +344,7 @@ export default async function loadGraph() {
     }
   )
   const data2 = await runQuery({
-    query: 'g.V().valueMap(true)',
+    query: 'g.V().limit(10).outE().inV().path()',
     password: 'puppygraph123',
     url: 'ws://localhost:8182/gremlin',
     username: 'puppygraph',

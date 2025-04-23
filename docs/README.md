@@ -277,4 +277,10 @@ For websites HTML 2.5 and higher, yWorks has an [app generator](https://www.ywor
 Our dataset contains quite a few kinds of vertices and edges, so we'll have to add those in. When making the visualizations, it's also possible to filter out certain information from view without needing to make an additional query.
 
 Using their app generator, we should get something like this:
-[](app_generator.png)
+![](app_generator.png)
+
+We can also edit the code in `loadGraph.js` instead of using the app generator. For a nicer graph, be sure to set the layout to radial!
+
+![](webview.png)
+
+# Step 3: Querying the Graph

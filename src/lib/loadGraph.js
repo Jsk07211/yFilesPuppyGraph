@@ -293,6 +293,8 @@ export default async function loadGraph() {
     sourceArrow: () => 'none',
     targetArrow: () => 'triangle',
   })
+
+  // HANDLES DATA QUERIES
   const data = await runQuery({
     query: 'g.E()',
     password: '',
@@ -301,7 +303,27 @@ export default async function loadGraph() {
     mimeType: 'application/vnd.gremlin-v3.0+json',
   })
 
+  const data2 = await runQuery({
+    query: 'g.V().hasLabel("User").has("account_status", "active")',
+    url: 'ws://localhost:8182/gremlin',
+    username: 'puppygraph',
+    password: 'puppygraph123',
+    mimeType: 'application/vnd.gremlin-v3.0+json'
+  })
+
+  const data3 = await runQuery({
+    query: 'g.V().hasLabel("User").has("account_status", "active").both()',
+    url: 'ws://localhost:8182/gremlin',
+    username: 'puppygraph',
+    password: 'puppygraph123',
+    mimeType: 'application/vnd.gremlin-v3.0+json'
+  })
+
   const out = await project(data, { binding: (item) => item._items })
+  const out4 = await project(data2, { binding: (item) => item._items })
+  const out5 = await project(data3, { binding: (item) => item._items })
+
+  // HANDLES DISPLAY OF DATA
   const out2 = await filter(out, {
     expression: new Function(
       'with(arguments[0]) { return (label === "ACCESS") }'
@@ -344,24 +366,6 @@ export default async function loadGraph() {
       stroke: () => '2px #0055cc',
     }
   )
-  const data2 = await runQuery({
-    query: 'g.V().hasLabel("User").has("account_status", "active")',
-    url: 'ws://localhost:8182/gremlin',
-    username: 'puppygraph',
-    password: 'puppygraph123',
-    mimeType: 'application/vnd.gremlin-v3.0+json'
-  })
-
-  const data3 = await runQuery({
-    query: 'g.V().hasLabel("User").has("account_status", "active").both()',
-    url: 'ws://localhost:8182/gremlin',
-    username: 'puppygraph',
-    password: 'puppygraph123',
-    mimeType: 'application/vnd.gremlin-v3.0+json'
-  })
-
-  const out4 = await project(data2, { binding: (item) => item._items })
-  const out5 = await project(data3, { binding: (item) => item._items })
 
   const out15 = await filter(out4, {
     expression: new Function(
@@ -388,10 +392,27 @@ export default async function loadGraph() {
     ],
     edgesSources: [edgesSource2, edgesSource],
   })
+
+  // HANDLES SHAPE OF THE GRAPH
+  // const out17 = await arrange(graph, {
+  //   worker: false,
+  //   name: 'HierarchialLayout',
+  // })
+
+  // const out17 = await arrange(graph, {
+  //   worker: false,
+  //   name: 'OrganicLayout',
+  // })
+
+  // const out17 = await arrange(graph, {
+  //   worker: false,
+  //   name: 'CircularLayout',
+  //   properties: { partitioningPolicy: 'bcc-compact' },
+  // })
+
   const out17 = await arrange(graph, {
     worker: false,
-    name: 'CircularLayout',
-    properties: { partitioningPolicy: 'bcc-compact' },
+    name: 'OrthogonalLayout',
   })
 
   return out17

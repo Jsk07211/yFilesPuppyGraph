@@ -301,8 +301,6 @@ export default async function loadGraph() {
     mimeType: 'application/vnd.gremlin-v3.0+json',
   })
 
-  console.log(data);
-
   const out = await project(data, { binding: (item) => item._items })
   const out2 = await filter(out, {
     expression: new Function(
@@ -362,13 +360,10 @@ export default async function loadGraph() {
     mimeType: 'application/vnd.gremlin-v3.0+json'
   })
 
-  console.log(data2);
-  console.log(data3);
+  const out4 = await project(data2, { binding: (item) => item._items })
+  const out5 = await project(data3, { binding: (item) => item._items })
 
-  const out4a = await project(data2, { binding: (item) => item._items })
-  const out4b = await project(data3, { binding: (item) => item._items })
-
-  const out15 = await filter(out4a, {
+  const out15 = await filter(out4, {
     expression: new Function(
       "with(arguments[0]) { return (label === 'User') }"
     ),
@@ -377,7 +372,7 @@ export default async function loadGraph() {
     { data: out15, nodeCreator: nodeCreator11 },
     { idProvider: (item) => item.id }
   )
-  const out16 = await filter(out4b, {
+  const out16 = await filter(out5, {
     expression: new Function(
       'with(arguments[0]) { return (label === "InternetGateway") }'
     ),

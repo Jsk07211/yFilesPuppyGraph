@@ -300,6 +300,9 @@ export default async function loadGraph() {
     username: '',
     mimeType: 'application/vnd.gremlin-v3.0+json',
   })
+
+  console.log(data);
+
   const out = await project(data, { binding: (item) => item._items })
   const out2 = await filter(out, {
     expression: new Function(
@@ -344,102 +347,28 @@ export default async function loadGraph() {
     }
   )
   const data2 = await runQuery({
-    query: 'g.V().limit(10).outE().inV().path()',
-    password: 'puppygraph123',
+    query: 'g.V().hasLabel("User").has("account_status", "active")',
     url: 'ws://localhost:8182/gremlin',
     username: 'puppygraph',
-    mimeType: 'application/vnd.gremlin-v3.0+json',
+    password: 'puppygraph123',
+    mimeType: 'application/vnd.gremlin-v3.0+json'
   })
-  const out4 = await project(data2, { binding: (item) => item._items })
-  const out5 = await filter(out4, {
-    expression: new Function(
-      'with(arguments[0]) { return (label === "IngressRule") }'
-    ),
+
+  const data3 = await runQuery({
+    query: 'g.V().hasLabel("User").has("account_status", "active").both()',
+    url: 'ws://localhost:8182/gremlin',
+    username: 'puppygraph',
+    password: 'puppygraph123',
+    mimeType: 'application/vnd.gremlin-v3.0+json'
   })
-  const nodesSource = await buildNodesSourceData(
-    { data: out5, nodeCreator },
-    { idProvider: (item) => item.id }
-  )
-  const out6 = await filter(out4, {
-    expression: new Function(
-      'with(arguments[0]) { return (label === "PrivateIP") }'
-    ),
-  })
-  const nodesSource2 = await buildNodesSourceData(
-    { data: out6, nodeCreator: nodeCreator2 },
-    { idProvider: (item) => item.id }
-  )
-  const out7 = await filter(out4, {
-    expression: new Function(
-      'with(arguments[0]) { return (label === "PublicIP") }'
-    ),
-  })
-  const nodesSource3 = await buildNodesSourceData(
-    { data: out7, nodeCreator: nodeCreator3 },
-    { idProvider: (item) => item.id }
-  )
-  const out8 = await filter(out4, {
-    expression: new Function(
-      'with(arguments[0]) { return (label === "Resource") }'
-    ),
-  })
-  const nodesSource4 = await buildNodesSourceData(
-    { data: out8, nodeCreator: nodeCreator4 },
-    { idProvider: (item) => item.id }
-  )
-  const out9 = await filter(out4, {
-    expression: new Function(
-      'with(arguments[0]) { return (label === "Role") }'
-    ),
-  })
-  const nodesSource5 = await buildNodesSourceData(
-    { data: out9, nodeCreator: nodeCreator5 },
-    { idProvider: (item) => item.id }
-  )
-  const out10 = await filter(out4, {
-    expression: new Function(
-      'with(arguments[0]) { return (label === "VMInstance") }'
-    ),
-  })
-  const nodesSource6 = await buildNodesSourceData(
-    { data: out10, nodeCreator: nodeCreator6 },
-    { idProvider: (item) => item.id }
-  )
-  const out11 = await filter(out4, {
-    expression: new Function(
-      'with(arguments[0]) { return (label === "NetworkInterface") }'
-    ),
-  })
-  const nodesSource7 = await buildNodesSourceData(
-    { data: out11, nodeCreator: nodeCreator7 },
-    { idProvider: (item) => item.id }
-  )
-  const out12 = await filter(out4, {
-    expression: new Function(
-      'with(arguments[0]) { return (label === "SecurityGroup") }'
-    ),
-  })
-  const nodesSource8 = await buildNodesSourceData(
-    { data: out12, nodeCreator: nodeCreator8 },
-    { idProvider: (item) => item.id }
-  )
-  const out13 = await filter(out4, {
-    expression: new Function(
-      'with(arguments[0]) { return (label === "Subnet") }'
-    ),
-  })
-  const nodesSource9 = await buildNodesSourceData(
-    { data: out13, nodeCreator: nodeCreator9 },
-    { idProvider: (item) => item.id }
-  )
-  const out14 = await filter(out4, {
-    expression: new Function('with(arguments[0]) { return (label === "VPC") }'),
-  })
-  const nodesSource10 = await buildNodesSourceData(
-    { data: out14, nodeCreator: nodeCreator10 },
-    { idProvider: (item) => item.id }
-  )
-  const out15 = await filter(out4, {
+
+  console.log(data2);
+  console.log(data3);
+
+  const out4a = await project(data2, { binding: (item) => item._items })
+  const out4b = await project(data3, { binding: (item) => item._items })
+
+  const out15 = await filter(out4a, {
     expression: new Function(
       "with(arguments[0]) { return (label === 'User') }"
     ),
@@ -448,7 +377,7 @@ export default async function loadGraph() {
     { data: out15, nodeCreator: nodeCreator11 },
     { idProvider: (item) => item.id }
   )
-  const out16 = await filter(out4, {
+  const out16 = await filter(out4b, {
     expression: new Function(
       'with(arguments[0]) { return (label === "InternetGateway") }'
     ),
@@ -461,16 +390,6 @@ export default async function loadGraph() {
     nodesSources: [
       nodesSource12,
       nodesSource11,
-      nodesSource10,
-      nodesSource9,
-      nodesSource8,
-      nodesSource7,
-      nodesSource6,
-      nodesSource5,
-      nodesSource4,
-      nodesSource3,
-      nodesSource2,
-      nodesSource,
     ],
     edgesSources: [edgesSource2, edgesSource],
   })

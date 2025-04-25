@@ -124,6 +124,32 @@ export default async function loadGraph() {
     mimeType: 'application/vnd.gremlin-v3.0+json'
   })
 
+  // const data2 = await runQuery({
+  //   query: 'g.V().valueMap(true)',
+  //   url: 'ws://localhost:8182/gremlin',
+  //   username: 'puppygraph',
+  //   password: 'puppygraph123',
+  //   mimeType: 'application/vnd.gremlin-v3.0+json'
+  // })
+  // const data3 = await runQuery({
+  //   query: 'g.V().valueMap(true)',
+  //   url: 'ws://localhost:8182/gremlin',
+  //   username: 'puppygraph',
+  //   password: 'puppygraph123',
+  //   mimeType: 'application/vnd.gremlin-v3.0+json'
+  // })
+
+
+  // Would need to reformat output to expected
+  // const data = await runQuery({
+  //   query: 'g.V().hasLabel("User").has("account_status", "active").as("user").bothE().as("access").otherV().as("gateway").select("user", "access", "gateway")',
+  //   url: 'ws://localhost:8182/gremlin',
+  //   username: 'puppygraph',
+  //   password: 'puppygraph123',
+  //   mimeType: 'application/vnd.gremlin-v3.0+json'
+  // })
+
+
   const out = await project(data, { binding: (item) => item._items })
   const out2 = await project(data2, { binding: (item) => item._items })
   const out3 = await project(data3, { binding: (item) => item._items })
@@ -174,20 +200,24 @@ export default async function loadGraph() {
   //   name: 'HierarchialLayout',
   // })
 
-  // const out7 = await arrange(graph, {
-  //   worker: false,
-  //   name: 'OrganicLayout',
-  // })
+  // Force directed graph
+  const out7 = await arrange(graph, {
+    worker: false,
+    name: 'OrganicLayout',
+    compactnessFactor: 0,
+  })
 
   // const out7 = await arrange(graph, {
   //   worker: false,
   //   name: 'OrthogonalLayout',
   // })
 
-  const out7 = await arrange(graph, {
-    worker: false,
-    name: 'CircularLayout',
-  })
+  // const out7 = await arrange(graph, {
+  //   worker: false,
+  //   name: 'CircularLayout',
+  //   // properties: { partitioningPolicy: 'single-cycle' },
+  //   properties: { partitioningPolicy: 'bcc-compact' },
+  // })
 
   // const out7 = await arrange(graph, {
   //   worker: false,

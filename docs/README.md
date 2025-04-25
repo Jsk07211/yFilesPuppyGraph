@@ -1,14 +1,35 @@
-# From Complex Graphs to Clear Decisions: PuppyGraph + yWorks
-At its core, PuppyGraph is designed to handle complex relationships between data points. But raw data, *especially* when it’s deeply interconnected, can be hard to understand at a glance. That’s where data visualization steps in.
+# Beyond Graphs: The Hows and Whys of Data Storytelling
+Spreadsheets and SQL tables are great for storing information, but they weren't designed for telling stories. They show you what’s there, but not always how it connects. And that’s where the real insights often live. Here's where graph databases come into play.
 
-While PuppyGraph comes with its own built-in UI for exploring graph data, its design focuses on simplicity and ease of use rather than deep customization. For teams or projects that require more advanced visualization features — like tailored layouts, interactive styling, or specialized graph diagrams — pairing PuppyGraph with dedicated visualization tools can enhance both clarity and flexibility. This combination lets you tap into PuppyGraph’s powerful querying engine while leveraging visualization platforms to craft the exact view your data story needs.
+Graphs are incredibly powerful for analysis. Unlike traditional databases, which force you to think in rows, joins, and foreign keys, graph queries follow the actual shape and meaning of your data. You’re not asking “What’s in table A that matches table B?”—you’re saying “Show me all the customers who influenced someone else who bought this product last week.” It’s closer to how people naturally think, providing an intuitive way to traverse through your data.
 
-That’s where yWorks really starts to shine. With the right tools, it’s much easier to make sense of dense relationships, uncover hidden patterns, and communicate insights clearly. 
+But understanding the data is only half the battle. The other half? Telling the story. That’s where graph visualization comes in. In this guide, we look at how data storytelling with graphs can improve clarity and shape understanding, allowing you to get more mileage out of the data you already have.
 
-For this tutorial, we’re using building a **cloud security graph** — and for good reason. Cloud security is one of the most common and impactful use cases for graph analytics. With complex relationships between users, roles, assets, permissions, and threats, it's a perfect real-world example of where graph structures truly shine. You can find all required resources in the [GitHub repository](https://github.com/puppygraph/puppygraph-getting-started/tree/main/use-case-demos/cloud-security-graph-demo), and a more in-depth exploration of this dataset in our [blog](https://www.puppygraph.com/blog/wiz-security-graph).
+# Choosing the Right Tool: Why Graphs?
+Before diving into layouts and visualizations, it’s worth asking: why graphs at all? What makes them so special when it comes to making sense of complex data?
 
+A graph consists of three basic blocks:
+* Vertices: Entities or objects (e.g., people, places).
+* Edges: Relationships between vertices (e.g., "logged in", "reviewed").
+* Properties: Key-value pair of attributes for a vertex or an edge (e.g., a user's name or the date of purchase)
 
-# Step 1: Deploying PuppyGraph
+Who influenced whom? Which products are frequently bought together? What steps lead from issue to resolution? These are inherently relational questions, which are perfect for a graph solution. In a graph database, those relationships aren't just inferred through joins—they're baked into the structure itself. Each edge is a direct, stored connection, making it possible to traverse complex networks of data in a way that’s fast, meaningful, and true to how the relationships actually exist.
+
+# Understanding the Data: Which Graphs?
+## Hierarchial Layout
+
+## Organic Layout
+
+## Orthogonal Layout
+
+## Circular Layout
+
+## Tree Layout
+
+# Visualizing the Theory: How to Create A Graph?
+For this section of the tutorial, we will be building a **cloud security graph** — and for good reason. Cloud security is one of the most common and impactful use cases for graph analytics. With complex relationships between users, roles, assets, permissions, and threats, it's a perfect real-world example of where graph structures truly shine. You can find all required resources in the [GitHub repository](https://github.com/puppygraph/puppygraph-getting-started/tree/main/use-case-demos/cloud-security-graph-demo), and a more in-depth exploration of this dataset in our [blog](https://www.puppygraph.com/blog/wiz-security-graph).
+
+## Step 1: Deploying PuppyGraph
 
 ### Setting up the Docker
 We'll need several things for this tutorial:
@@ -271,19 +292,17 @@ curl -XPOST -H "content-type: application/json" --data-binary @./schema.json --u
 
 We can now query our relational data as a graph!
 
-# Step 2: Creating the Website Template
+## Step 2: Creating the Website Template
 For websites HTML 2.5 and higher, yWorks has an [app generator](https://www.yworks.com/app-generator/) to quickly create a web app for visualization purposes. You also want the yFiles-for-HTML server up and running so that the app generator can access the data we uploaded to our PuppyGraph instance.
 
-Our dataset contains quite a few kinds of vertices and edges, so we'll have to add those in. When making the visualizations, it's also possible to filter out certain information from view without needing to make an additional query.
+Our dataset contains quite a few kinds of vertices and edges, so we'll have to add those in. When making the visualizations, it's also possible to filter out certain information from view without needing to make an additional query. For this demonstration, we'll only be looking at "User" and "InternetGateway" vertices, as well as the "ACCESS" edges.
 
 Using their app generator, we should get something like this:
-![](app_generator.png)
+![](/docs/all.png)
 
-We can also edit the code in `loadGraph.js` instead of using the app generator. For a nicer graph, be sure to set the layout to radial!
+We can also edit the code in `loadGraph.js` instead of using the app generator. 
 
-![](webview.png)
-
-# Step 3: Querying the Graph
+## Step 3: Querying the Graph
 The full graph looks cool — no doubt. But when you're staring at hundreds of nodes and edges, it gets hard to tell what’s actually going on. It’s a lot to take in, and without some direction, it’s easy to get lost in the noise.
 
 Currently, we're querying for everything with this command:
@@ -291,3 +310,77 @@ Currently, we're querying for everything with this command:
 g.V().valueMap(true)
 ```
 
+Let's narrow down the scope of our search. What if I only wanted to know which internet gateways were in use by **active** users? We'll need to know which users are active and which gateways are connected to these active users. For readability, we'll split the query into three parts:
+
+Query 1: Getting the Access Edges
+```
+const data = await runQuery({
+  query: 'g.E()',
+  password: '',
+  url: 'ws://localhost:8182/gremlin',
+  username: '',
+  mimeType: 'application/vnd.gremlin-v3.0+json',
+})
+```
+
+Query 2: Getting the Active Users
+```
+  const data2 = await runQuery({
+    query: 'g.V().hasLabel("InternetGateway")',
+    url: 'ws://localhost:8182/gremlin',
+    username: 'puppygraph',
+    password: 'puppygraph123',
+    mimeType: 'application/vnd.gremlin-v3.0+json'
+  })
+```
+
+Query 3: Getting the Relevant Internet Gateways
+```
+const data3 = await runQuery({
+  query: 'g.V().hasLabel("User").has("account_status", "active")',
+  url: 'ws://localhost:8182/gremlin',
+  username: 'puppygraph',
+  password: 'puppygraph123',
+  mimeType: 'application/vnd.gremlin-v3.0+json'
+})
+```
+
+We can just update how we're loading our vertices:
+```
+const out = await project(data, { binding: (item) => item._items })
+const out2 = await project(data2, { binding: (item) => item._items })
+const out3 = await project(data3, { binding: (item) => item._items })
+
+const out4 = await filter(out, {
+  expression: new Function(
+    'with(arguments[0]) { return (label === "ACCESS") }'
+  ),
+})
+const out5 = await filter(out2, {
+  expression: new Function(
+    'with(arguments[0]) { return (label === "InternetGateway") }'
+  ),
+})
+const out6 = await filter(out3, {
+  expression: new Function(
+    "with(arguments[0]) { return (label === 'User') }"
+  ),
+})
+```
+
+Alternatively, we could also run the following query and reformat the returned data into the expected format:
+```
+g.V().hasLabel("User").has("account_status", "active").as("user").bothE().as("access").otherV().as("gateway").select("user", "access", "gateway")
+```
+
+If all works well, we should get the following webview:
+![](/docs/hierarchial.png)
+
+When you're looking at which active users are accessing internet gateways, a hierarchical layout can really help untangle the picture. It gives you a clear top-down view of who’s connected to what, and makes it easier to spot overloaded gateways or unusual traffic patterns. But it’s not perfect. That same structure can make it harder to see lateral relationships or cross-connections that don’t fit neatly into a tree.
+
+We can try out an Organic Layout, which makes it easier to see the exact users that are connected to each internet gateway, but it also introduces a fair bit of clutter:
+![](/docs/organic.png)
+
+That’s the tradeoff: different layouts surface different insights. And ultimately, it’s the combination of a well-formed query and the right visual structure that makes a graph not just informative, but meaningful. When those two pieces click, you’re not just analyzing data—you’re telling a story with it.
+
+# Conclusion

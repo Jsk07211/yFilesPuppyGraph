@@ -49,23 +49,32 @@ import { arrange } from './Layout'
  * The API documentation is also available online, here: https://docs.yworks.com/yfileshtml - Enjoy!
  */
 export default async function loadGraph() {
+  // HANDLES STYLE OF LABELS
   const labelConfiguration = await buildLabelConfiguration({
     textBinding: (item) => item.label,
     placement: () => 'center',
     fill: () => 'gray',
-  })
-  const edgeCreator = await buildEdgeCreator([labelConfiguration], {
-    stroke: () => '1px gray',
-    sourceArrow: () => 'none',
-    targetArrow: () => 'triangle',
   })
   const labelConfiguration2 = await buildLabelConfiguration({
     textBinding: (item) => item.id,
     placement: () => 'bottom',
   })
   const labelConfiguration3 = await buildLabelConfiguration({
-    textBinding: (item) => item.protocol,
+    textBinding: (item) => item.username,
     placement: () => 'topleft',
+  })
+    const labelConfiguration4 = await buildLabelConfiguration({
+    textBinding: (item) => item.id,
+    placement: () => 'bottom',
+  })
+  const labelConfiguration5 = await buildLabelConfiguration({
+    textBinding: (item) => item.name,
+    placement: () => 'topleft',
+  })
+  const edgeCreator = await buildEdgeCreator([labelConfiguration], {
+    stroke: () => '1px gray',
+    sourceArrow: () => 'none',
+    targetArrow: () => 'triangle',
   })
   const nodeCreator = await buildNodeCreator(
     [labelConfiguration3, labelConfiguration2],
@@ -74,19 +83,11 @@ export default async function loadGraph() {
       width: () => 120,
       height: () => 80,
       styleProvider: 'ShapeNodeStyle',
-      fill: () => 'lightblue',
+      fill: () => 'lightpink',
       shape: () => 'round-rectangle',
-      stroke: () => '2px #0055cc',
+      stroke: () => '2px #cc0055',
     }
   )
-  const labelConfiguration4 = await buildLabelConfiguration({
-    textBinding: (item) => item.id,
-    placement: () => 'bottom',
-  })
-  const labelConfiguration5 = await buildLabelConfiguration({
-    textBinding: (item) => item.ip_address,
-    placement: () => 'topleft',
-  })
   const nodeCreator2 = await buildNodeCreator(
     [labelConfiguration5, labelConfiguration4],
     {
@@ -99,200 +100,6 @@ export default async function loadGraph() {
       stroke: () => '2px #0055cc',
     }
   )
-  const labelConfiguration6 = await buildLabelConfiguration({
-    textBinding: (item) => item.id,
-    placement: () => 'bottom',
-  })
-  const labelConfiguration7 = await buildLabelConfiguration({
-    textBinding: (item) => item.ip_address,
-    placement: () => 'topleft',
-  })
-  const nodeCreator3 = await buildNodeCreator(
-    [labelConfiguration7, labelConfiguration6],
-    {
-      x: () => 0,
-      width: () => 120,
-      height: () => 80,
-      styleProvider: 'ShapeNodeStyle',
-      fill: () => 'lightblue',
-      shape: () => 'round-rectangle',
-      stroke: () => '2px #0055cc',
-    }
-  )
-  const labelConfiguration8 = await buildLabelConfiguration({
-    textBinding: (item) => item.id,
-    placement: () => 'bottom',
-  })
-  const labelConfiguration9 = await buildLabelConfiguration({
-    textBinding: (item) => item.name,
-    placement: () => 'topleft',
-  })
-  const nodeCreator4 = await buildNodeCreator(
-    [labelConfiguration9, labelConfiguration8],
-    {
-      x: () => 0,
-      width: () => 120,
-      height: () => 80,
-      styleProvider: 'ShapeNodeStyle',
-      fill: () => 'lightblue',
-      shape: () => 'round-rectangle',
-      stroke: () => '2px #0055cc',
-    }
-  )
-  const labelConfiguration10 = await buildLabelConfiguration({
-    textBinding: (item) => item.id,
-    placement: () => 'bottom',
-  })
-  const labelConfiguration11 = await buildLabelConfiguration({
-    textBinding: (item) => item.name,
-    placement: () => 'topleft',
-  })
-  const nodeCreator5 = await buildNodeCreator(
-    [labelConfiguration11, labelConfiguration10],
-    {
-      x: () => 0,
-      width: () => 120,
-      height: () => 80,
-      styleProvider: 'ShapeNodeStyle',
-      fill: () => 'lightblue',
-      shape: () => 'round-rectangle',
-      stroke: () => '2px #0055cc',
-    }
-  )
-  const labelConfiguration12 = await buildLabelConfiguration({
-    textBinding: (item) => item.id,
-    placement: () => 'bottom',
-  })
-  const labelConfiguration13 = await buildLabelConfiguration({
-    textBinding: (item) => item.name,
-    placement: () => 'topleft',
-  })
-  const nodeCreator6 = await buildNodeCreator(
-    [labelConfiguration13, labelConfiguration12],
-    {
-      x: () => 0,
-      width: () => 120,
-      height: () => 80,
-      styleProvider: 'ShapeNodeStyle',
-      fill: () => 'lightblue',
-      shape: () => 'round-rectangle',
-      stroke: () => '2px #0055cc',
-    }
-  )
-  const labelConfiguration14 = await buildLabelConfiguration({
-    textBinding: (item) => item.id,
-    placement: () => 'bottom',
-  })
-  const labelConfiguration15 = await buildLabelConfiguration({
-    textBinding: (item) => item.name,
-    placement: () => 'topleft',
-  })
-  const nodeCreator7 = await buildNodeCreator(
-    [labelConfiguration15, labelConfiguration14],
-    {
-      x: () => 0,
-      width: () => 120,
-      height: () => 80,
-      styleProvider: 'ShapeNodeStyle',
-      fill: () => 'lightblue',
-      shape: () => 'round-rectangle',
-      stroke: () => '2px #0055cc',
-    }
-  )
-  const labelConfiguration16 = await buildLabelConfiguration({
-    textBinding: (item) => item.id,
-    placement: () => 'bottom',
-  })
-  const labelConfiguration17 = await buildLabelConfiguration({
-    textBinding: (item) => item.name,
-    placement: () => 'topleft',
-  })
-  const nodeCreator8 = await buildNodeCreator(
-    [labelConfiguration17, labelConfiguration16],
-    {
-      x: () => 0,
-      width: () => 120,
-      height: () => 80,
-      styleProvider: 'ShapeNodeStyle',
-      fill: () => 'lightblue',
-      shape: () => 'round-rectangle',
-      stroke: () => '2px #0055cc',
-    }
-  )
-  const labelConfiguration18 = await buildLabelConfiguration({
-    textBinding: (item) => item.id,
-    placement: () => 'bottom',
-  })
-  const labelConfiguration19 = await buildLabelConfiguration({
-    textBinding: (item) => item.name,
-    placement: () => 'topleft',
-  })
-  const nodeCreator9 = await buildNodeCreator(
-    [labelConfiguration19, labelConfiguration18],
-    {
-      x: () => 0,
-      width: () => 120,
-      height: () => 80,
-      styleProvider: 'ShapeNodeStyle',
-      fill: () => 'lightblue',
-      shape: () => 'round-rectangle',
-      stroke: () => '2px #0055cc',
-    }
-  )
-  const labelConfiguration20 = await buildLabelConfiguration({
-    textBinding: (item) => item.id,
-    placement: () => 'bottom',
-  })
-  const labelConfiguration21 = await buildLabelConfiguration({
-    textBinding: (item) => item.name,
-    placement: () => 'topleft',
-  })
-  const nodeCreator10 = await buildNodeCreator(
-    [labelConfiguration21, labelConfiguration20],
-    {
-      x: () => 0,
-      width: () => 120,
-      height: () => 80,
-      styleProvider: 'ShapeNodeStyle',
-      fill: () => 'lightblue',
-      shape: () => 'round-rectangle',
-      stroke: () => '2px #0055cc',
-    }
-  )
-  const labelConfiguration22 = await buildLabelConfiguration({
-    textBinding: (item) => item.id,
-    placement: () => 'bottom',
-  })
-  const labelConfiguration23 = await buildLabelConfiguration({
-    textBinding: (item) => item.username,
-    placement: () => 'topleft',
-  })
-  const nodeCreator11 = await buildNodeCreator(
-    [labelConfiguration23, labelConfiguration22],
-    {
-      x: () => 0,
-      width: () => 120,
-      height: () => 80,
-      styleProvider: 'ShapeNodeStyle',
-      fill: () => 'lightpink',
-      shape: () => 'round-rectangle',
-      stroke: () => '2px #cc0055',
-    }
-  )
-  const labelConfiguration24 = await buildLabelConfiguration({
-    textBinding: (item) => item.id,
-    placement: () => 'bottom',
-  })
-  const labelConfiguration25 = await buildLabelConfiguration({
-    textBinding: (item) => item.label,
-    placement: () => 'center',
-    fill: () => 'gray',
-  })
-  const edgeCreator2 = await buildEdgeCreator([labelConfiguration25], {
-    stroke: () => '1px gray',
-    sourceArrow: () => 'none',
-    targetArrow: () => 'triangle',
-  })
 
   // HANDLES DATA QUERIES
   const data = await runQuery({
@@ -302,8 +109,14 @@ export default async function loadGraph() {
     username: '',
     mimeType: 'application/vnd.gremlin-v3.0+json',
   })
-
   const data2 = await runQuery({
+    query: 'g.V().hasLabel("InternetGateway")',
+    url: 'ws://localhost:8182/gremlin',
+    username: 'puppygraph',
+    password: 'puppygraph123',
+    mimeType: 'application/vnd.gremlin-v3.0+json'
+  })
+  const data3 = await runQuery({
     query: 'g.V().hasLabel("User").has("account_status", "active")',
     url: 'ws://localhost:8182/gremlin',
     username: 'puppygraph',
@@ -311,109 +124,75 @@ export default async function loadGraph() {
     mimeType: 'application/vnd.gremlin-v3.0+json'
   })
 
-  const data3 = await runQuery({
-    query: 'g.V().hasLabel("User").has("account_status", "active").both()',
-    url: 'ws://localhost:8182/gremlin',
-    username: 'puppygraph',
-    password: 'puppygraph123',
-    mimeType: 'application/vnd.gremlin-v3.0+json'
-  })
-
   const out = await project(data, { binding: (item) => item._items })
-  const out4 = await project(data2, { binding: (item) => item._items })
-  const out5 = await project(data3, { binding: (item) => item._items })
+  const out2 = await project(data2, { binding: (item) => item._items })
+  const out3 = await project(data3, { binding: (item) => item._items })
 
   // HANDLES DISPLAY OF DATA
-  const out2 = await filter(out, {
+  const out4 = await filter(out, {
     expression: new Function(
       'with(arguments[0]) { return (label === "ACCESS") }'
     ),
   })
-  const edgesSource = await buildEdgesSourceData(
-    { data: out2, edgeCreator },
-    {
-      idProvider: (item) => item.id,
-      sourceIdProvider: (item) => item.outV.id,
-      targetIdProvider: (item) => item.inV.id,
-    }
-  )
-  const out3 = await filter(out, {
-    expression: new Function(
-      'with(arguments[0]) { return (label === "ACCESS") }'
-    ),
-  })
-  const edgesSource2 = await buildEdgesSourceData(
-    { data: out3, edgeCreator: edgeCreator2 },
-    {
-      idProvider: (item) => item.id,
-      sourceIdProvider: (item) => item.outV.id,
-      targetIdProvider: (item) => item.inV.id,
-    }
-  )
-  const labelConfiguration26 = await buildLabelConfiguration({
-    textBinding: (item) => item.name,
-    placement: () => 'topleft',
-  })
-  const nodeCreator12 = await buildNodeCreator(
-    [labelConfiguration26, labelConfiguration24],
-    {
-      x: () => 0,
-      width: () => 120,
-      height: () => 80,
-      styleProvider: 'ShapeNodeStyle',
-      fill: () => 'lightblue',
-      shape: () => 'round-rectangle',
-      stroke: () => '2px #0055cc',
-    }
-  )
-
-  const out15 = await filter(out4, {
-    expression: new Function(
-      "with(arguments[0]) { return (label === 'User') }"
-    ),
-  })
-  const nodesSource11 = await buildNodesSourceData(
-    { data: out15, nodeCreator: nodeCreator11 },
-    { idProvider: (item) => item.id }
-  )
-  const out16 = await filter(out5, {
+  const out5 = await filter(out2, {
     expression: new Function(
       'with(arguments[0]) { return (label === "InternetGateway") }'
     ),
   })
-  const nodesSource12 = await buildNodesSourceData(
-    { data: out16, nodeCreator: nodeCreator12 },
+  const out6 = await filter(out3, {
+    expression: new Function(
+      "with(arguments[0]) { return (label === 'User') }"
+    ),
+  })
+  const edgesSource = await buildEdgesSourceData(
+    { data: out4, edgeCreator },
+    {
+      idProvider: (item) => item.id,
+      sourceIdProvider: (item) => item.outV.id,
+      targetIdProvider: (item) => item.inV.id,
+    }
+  )
+  const nodesSource1 = await buildNodesSourceData(
+    { data: out5, nodeCreator: nodeCreator2 },
+    { idProvider: (item) => item.id }
+  )
+  const nodesSource2 = await buildNodesSourceData(
+    { data: out6, nodeCreator: nodeCreator },
     { idProvider: (item) => item.id }
   )
   const graph = await buildGraph({
     nodesSources: [
-      nodesSource12,
-      nodesSource11,
+      nodesSource1,
+      nodesSource2,
     ],
-    edgesSources: [edgesSource2, edgesSource],
+    edgesSources: [edgesSource],
   })
 
   // HANDLES SHAPE OF THE GRAPH
-  // const out17 = await arrange(graph, {
+  // const out7 = await arrange(graph, {
   //   worker: false,
   //   name: 'HierarchialLayout',
   // })
 
-  // const out17 = await arrange(graph, {
+  // const out7 = await arrange(graph, {
   //   worker: false,
   //   name: 'OrganicLayout',
   // })
 
-  // const out17 = await arrange(graph, {
+  // const out7 = await arrange(graph, {
   //   worker: false,
-  //   name: 'CircularLayout',
-  //   properties: { partitioningPolicy: 'bcc-compact' },
+  //   name: 'OrthogonalLayout',
   // })
 
-  const out17 = await arrange(graph, {
+  const out7 = await arrange(graph, {
     worker: false,
-    name: 'OrthogonalLayout',
+    name: 'CircularLayout',
   })
 
-  return out17
+  // const out7 = await arrange(graph, {
+  //   worker: false,
+  //   name: 'TreeLayout',
+  // })
+
+  return out7
 }

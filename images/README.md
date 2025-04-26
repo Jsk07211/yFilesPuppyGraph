@@ -16,15 +16,103 @@ A graph consists of three basic blocks:
 Who influenced whom? Which products are frequently bought together? What steps lead from issue to resolution? These are inherently relational questions, which are perfect for a graph solution. In a graph database, those relationships aren't just inferred through joins—they're baked into the structure itself. Each edge is a direct, stored connection, making it possible to traverse complex networks of data in a way that’s fast, meaningful, and true to how the relationships actually exist.
 
 # Understanding the Data: Which Graphs?
+By now, we’ve seen why graphs are such a powerful tool for working with connected data. But just because the data is structured as a graph doesn’t mean it’ll look meaningful at first glance. That’s where layout comes in.
+
+The way a graph is drawn can completely change how we understand it. A good layout brings structure to complexity, highlights important relationships, and makes it easier to spot patterns. A bad one? It turns even the best data into a tangled mess.
+
+So now that we’ve chosen the right tool—a graph—the next question is: which layout best reveals the story our data is trying to tell?
+
+Let's take a look at five common layout types—hierarchical, organic, orthogonal, circular, and tree—and explore what kinds of data each one works best with, along with the pitfalls to watch out for when using them. Because just like with querying, the right layout is less about aesthetics and more about clarity.
+
 ## Hierarchial Layout
+The hierarchical layout is all about structure. It arranges nodes in layers—usually from top to bottom or left to right—making it ideal for visualizing flows, dependencies, and authority. Think of things like org charts, decision trees, or data pipelines. It gives you a clear sense of direction: who reports to whom, what leads to what, and where things begin and end.
+
+![](/images/hierarchial_eg.png)
+
+Best when you want to:
+* Show dependencies or flow
+* Visualize multi-stage processes or pipelines
+* Emphasize top-down relationships
+
+Pitfalls:
+* Can obscure lateral relationships or connections that don’t fit into a linear flow
+* Might create visual clutter if too many nodes or levels are stacked
+* Less effective for showing interconnectedness between nodes at the same level
 
 ## Organic Layout
+The organic layout is great when you're working with data that doesn’t follow a strict order but still has some underlying structure. It spaces things out in a way that feels intuitive—nodes that are closely related end up near each other, while less-connected ones drift apart. It’s like watching a network settle into shape on its own.
+
+This kind of layout works especially well when you're exploring relationships and trying to spot patterns or groupings. Whether you're mapping out interactions in a social network or seeing which products get tagged together, it gives you a feel for how things naturally cluster.
+
+![](/images/organic_eg.png)
+
+Best suited for:
+* Discovering clusters or communities
+* Exploring organic, real-world connections
+* Letting the data’s structure emerge visually
+
+Pitfalls:
+* Can become visually cluttered with too many nodes or connections
+* May lack clear directionality, making it hard to follow the flow of relationships
+* Less effective when trying to display data that requires clear structure
 
 ## Orthogonal Layout
+The orthogonal layout is built for clarity and structure. It arranges nodes using horizontal and vertical lines, with right-angled bends in the edges. This makes it especially useful when you're working with systems that benefit from tidy, grid-like alignment—think flowcharts, database schemas, or technical diagrams.
+
+The right angles and clean spacing make it easier to follow connections without visual clutter, especially in diagrams where overlapping lines would cause confusion.
+
+![](/images/orthogonal_eg.png)
+
+Best suited for:
+* Visualizing system architectures or technical diagrams
+* Maintaining clean separation between nodes and edges
+* Reducing visual overlap in dense, structured graphs
+
+Pitfalls: 
+* May feel too rigid for data that doesn’t follow a neat, grid-like structure
+* Can create unnatural relationships by forcing nodes into specific alignments
+* Not ideal for visualizing organic or highly interconnected data
 
 ## Circular Layout
+The circular layout arranges nodes in a circle, with edges connecting them in a radial pattern. This layout is especially useful when you want to emphasize the equal relationship between nodes, rather than having one clear "leader" or "direction." It's perfect for visualizing networks where there are no clear top-down structures—like peer-to-peer systems or cyclical data.
+
+One of the biggest advantages of the circular layout is that it forces the network into a symmetrical structure, helping to highlight cyclic relationships or interactions that occur between all nodes. If you're analyzing social networks or feedback loops, this layout can give you a good sense of how things relate on the same level.
+
+![](/images/circular_bcc_eg.png)
+
+Best suited for:
+* Visualizing peer-to-peer or cyclical relationships
+* Highlighting equal relationships among all nodes
+* Representing networks with no clear direction or flow
+
+Pitfalls:
+* Can make directionality hard to discern, especially in complex networks
+* Might become difficult to read when dealing with large datasets or too many connections
+* May not represent hierarchical or flow-based relationships effectively
 
 ## Tree Layout
+The tree layout is all about clear, hierarchical relationships. It’s similar to a family tree, where nodes are arranged in a branching structure, showing parent-child relationships. This layout is perfect for data that follows a strict hierarchy, where one node has a clear single parent and potentially many child nodes.
+
+The tree layout is ideal when you need to emphasize ancestry, like when you’re exploring organizational charts or taxonomy classifications. It visually clarifies the connections between different levels, making it easy to see how everything is related within the hierarchy.
+
+![](/images/tree_eg.png)
+
+Best suited for:
+* Visualizing clear parent-child relationships
+* Mapping out organizational structures or taxonomies
+* Representing data with a strict hierarchical structure
+
+Pitfalls:
+* Struggles with nodes that have multiple parents, leading to confusing layouts
+* Not effective for representing complex or circular relationships
+* Can get cluttered or overwhelming with large hierarchies, especially if nodes have many children
+
+## Deciding on a Layout
+The layout you pick should match the structure of your data and the story you're trying to tell.
+
+For example, if you need to show a clear, ordered flow, something like a hierarchical or tree layout works well. If your data is more about connections and relationships, an organic or circular layout might give you a better view of the patterns. And if precision and structure are key, an orthogonal layout can keep everything neat and easy to follow.
+
+Of course, there are many other graph layouts out there, each suited to different kinds of data. The key is finding the one that best helps you reveal the insights you’re looking for and makes your data easier to understand. The right layout, paired with the right queries, is what transforms your data from numbers and lines into a meaningful story.
 
 # Visualizing the Theory: How to Create A Graph?
 For this section of the tutorial, we will be building a **cloud security graph** — and for good reason. Cloud security is one of the most common and impactful use cases for graph analytics. With complex relationships between users, roles, assets, permissions, and threats, it's a perfect real-world example of where graph structures truly shine. You can find all required resources in the [GitHub repository](https://github.com/puppygraph/puppygraph-getting-started/tree/main/use-case-demos/cloud-security-graph-demo), and a more in-depth exploration of this dataset in our [blog](https://www.puppygraph.com/blog/wiz-security-graph).
@@ -297,8 +385,8 @@ For websites HTML 2.5 and higher, yWorks has an [app generator](https://www.ywor
 
 Our dataset contains quite a few kinds of vertices and edges, so we'll have to add those in. When making the visualizations, it's also possible to filter out certain information from view without needing to make an additional query. For this demonstration, we'll only be looking at "User" and "InternetGateway" vertices, as well as the "ACCESS" edges.
 
-Using their app generator, we should get something like this:
-![](/docs/all.png)
+We'll be using yWork's app generator, so make sure your yFiles-for-HTML server is running in order to access your data. After a little bit of tinkering, we should get something like this:
+![](/images/all.png)
 
 We can also edit the code in `loadGraph.js` instead of using the app generator. 
 
@@ -374,13 +462,29 @@ g.V().hasLabel("User").has("account_status", "active").as("user").bothE().as("ac
 ```
 
 If all works well, we should get the following webview:
-![](/docs/hierarchial.png)
+![](/images/hierarchial.png)
 
 When you're looking at which active users are accessing internet gateways, a hierarchical layout can really help untangle the picture. It gives you a clear top-down view of who’s connected to what, and makes it easier to spot overloaded gateways or unusual traffic patterns. But it’s not perfect. That same structure can make it harder to see lateral relationships or cross-connections that don’t fit neatly into a tree.
 
-We can try out an Organic Layout, which makes it easier to see the exact users that are connected to each internet gateway, but it also introduces a fair bit of clutter:
-![](/docs/organic.png)
+![](/images/organic.png)
+With the Organic Layout, it is much easier to see the exact users that are connected to each internet gateway, but it also introduces a fair bit of clutter.
 
 That’s the tradeoff: different layouts surface different insights. And ultimately, it’s the combination of a well-formed query and the right visual structure that makes a graph not just informative, but meaningful. When those two pieces click, you’re not just analyzing data—you’re telling a story with it.
 
+# How PuppyGraph Enables Data Storytelling
+Up to this point, we've looked at how graph databases can help you make sense of complex relationships in your data. But here’s the thing: most organizations are still working with traditional relational databases. That doesn’t mean they have to miss out on the benefits of graph analytics.
+
+That’s where PuppyGraph fits in. As a **real-time, zero-ETL** graph query engine, PuppyGraph allows you to do away with the complicated Extract, Transform, Load (ETL) processes. You don’t need to export data, restructure it, or maintain a separate graph database. You can just plug in and start querying relationships the way they naturally exist in your data.
+
+By removing the overhead of data transformation, PuppyGraph gives you space to explore. It helps teams move from static tables to something more dynamic, where relationships aren’t hidden across JOINs but are visible and queryable as first-class citizens.
+
+It’s a more intuitive way to interact with your data—especially when you’re asking questions that revolve around connections, influence, or flow.
+
+And it’s not just quick to get started—PuppyGraph is built for scale. Even when working with massive datasets, you can query across relationships in real time without waiting around. Whether you're exploring a handful of records or combing through petabytes, the performance stays fast and responsive, so you can stay focused on the questions that matter—not the infrastructure behind them.
+
 # Conclusion
+At the end of the day, so much of data analysis comes down to understanding how things are connected. Graph visualization makes those relationships tangible—transforming lines in a table into patterns you can actually see. Whether you're tracking system dependencies, mapping user behavior, or surfacing clusters in your network, graphs help those hidden links rise to the surface.
+
+Traditionally, getting started with graph analytics meant a lot of setup and transformation. PuppyGraph changes that. By letting you query your relational data as a graph without the usual hassle, it gives you a direct path to exploring connections. And when you pair that with a powerful visualization tool like yWorks, your data becomes more than just numbers—it becomes a story you can follow and share.
+
+With the right tools and the right layout, you can stop digging through rows and columns and start seeing the bigger picture your data has been waiting to tell.

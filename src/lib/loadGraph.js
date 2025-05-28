@@ -38,6 +38,7 @@ import {
 } from './GraphBuilder'
 import { runQuery } from './GremlinLoader'
 import { arrange } from './Layout'
+import { OrganicEdgeRouter } from '@yfiles/yfiles'
 
 /**
  * This is automatically generated source code. It is largely undocumented and not necessarily
@@ -110,45 +111,19 @@ export default async function loadGraph() {
     mimeType: 'application/vnd.gremlin-v3.0+json',
   })
   const data2 = await runQuery({
-    query: 'g.V().hasLabel("InternetGateway")',
+    query: 'g.V().hasLabel("User")',
     url: 'ws://localhost:8182/gremlin',
     username: 'puppygraph',
     password: 'puppygraph123',
     mimeType: 'application/vnd.gremlin-v3.0+json'
   })
   const data3 = await runQuery({
-    query: 'g.V().hasLabel("User").has("account_status", "active")',
+    query: 'g.V().outE("ACCESS").has("access_level", "admin").inV().dedup()',
     url: 'ws://localhost:8182/gremlin',
     username: 'puppygraph',
     password: 'puppygraph123',
     mimeType: 'application/vnd.gremlin-v3.0+json'
   })
-
-  // const data2 = await runQuery({
-  //   query: 'g.V().valueMap(true)',
-  //   url: 'ws://localhost:8182/gremlin',
-  //   username: 'puppygraph',
-  //   password: 'puppygraph123',
-  //   mimeType: 'application/vnd.gremlin-v3.0+json'
-  // })
-  // const data3 = await runQuery({
-  //   query: 'g.V().valueMap(true)',
-  //   url: 'ws://localhost:8182/gremlin',
-  //   username: 'puppygraph',
-  //   password: 'puppygraph123',
-  //   mimeType: 'application/vnd.gremlin-v3.0+json'
-  // })
-
-
-  // Would need to reformat output to expected
-  // const data = await runQuery({
-  //   query: 'g.V().hasLabel("User").has("account_status", "active").as("user").bothE().as("access").otherV().as("gateway").select("user", "access", "gateway")',
-  //   url: 'ws://localhost:8182/gremlin',
-  //   username: 'puppygraph',
-  //   password: 'puppygraph123',
-  //   mimeType: 'application/vnd.gremlin-v3.0+json'
-  // })
-
 
   const out = await project(data, { binding: (item) => item._items })
   const out2 = await project(data2, { binding: (item) => item._items })
@@ -162,12 +137,12 @@ export default async function loadGraph() {
   })
   const out5 = await filter(out2, {
     expression: new Function(
-      'with(arguments[0]) { return (label === "InternetGateway") }'
+      'with(arguments[0]) { return (label === "User") }'
     ),
   })
   const out6 = await filter(out3, {
     expression: new Function(
-      "with(arguments[0]) { return (label === 'User') }"
+      'with(arguments[0]) { return (label === "InternetGateway") }'
     ),
   })
   const edgesSource = await buildEdgesSourceData(
@@ -200,11 +175,13 @@ export default async function loadGraph() {
   //   name: 'HierarchialLayout',
   // })
 
-  // Force directed graph
   const out7 = await arrange(graph, {
     worker: false,
     name: 'OrganicLayout',
-    compactnessFactor: 0,
+    considerNodeSizes: true,
+    nodeOverlapsAllowed: false,
+    avoidNodeEdgeOverlap: true,
+    minimumNodeDistance: 80,
   })
 
   // const out7 = await arrange(graph, {
